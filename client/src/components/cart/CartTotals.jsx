@@ -16,7 +16,7 @@ const CartTotals = () => {
                     </div>
                     <div className="flex items-center gap-x-2">
                         <Button type="primary" size="small" className="flex items-center justify-center !rounded-full" icon={<PlusCircleOutlined />} />
-                        <span>
+                        <span className="font-bold">
                             1
                         </span>
                         <Button type="primary" size="small" className="flex items-center justify-center !rounded-full" icon={<MinusCircleOutlined />} />
@@ -32,7 +32,7 @@ const CartTotals = () => {
                     </div>
                     <div className="flex items-center gap-x-2">
                         <Button type="primary" size="small" className="flex items-center justify-center !rounded-full" icon={<PlusCircleOutlined />} />
-                        <span>
+                        <span className="font-bold">
                             1
                         </span>
                         <Button type="primary" size="small" className="flex items-center justify-center !rounded-full" icon={<MinusCircleOutlined />} />
@@ -48,7 +48,7 @@ const CartTotals = () => {
                     </div>
                     <div className="flex items-center gap-x-2">
                         <Button type="primary" size="small" className="flex items-center justify-center !rounded-full" icon={<PlusCircleOutlined />} />
-                        <span>
+                        <span className="font-bold">
                             1
                         </span>
                         <Button type="primary" size="small" className="flex items-center justify-center !rounded-full" icon={<MinusCircleOutlined />} />
@@ -64,7 +64,7 @@ const CartTotals = () => {
                     </div>
                     <div className="flex items-center gap-x-2">
                         <Button type="primary" size="small" className="flex items-center justify-center !rounded-full" icon={<PlusCircleOutlined />} />
-                        <span>
+                        <span className="font-bold">
                             1
                         </span>
                         <Button type="primary" size="small" className="flex items-center justify-center !rounded-full" icon={<MinusCircleOutlined />} />
