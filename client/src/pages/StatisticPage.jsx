@@ -1,49 +1,9 @@
 import Header from "../components/header/Header.jsx";
 import StatisticCard from "../components/statistic/StatisticCard.jsx";
-import { Area, Pie } from '@ant-design/plots';
+
 
 const StatisticPage = () => {
 
-    const DemoArea = () => {
-        const config = {
-            data: {
-                type: 'fetch',
-                value: 'https://assets.antv.antgroup.com/g2/aapl.json',
-            },
-            xField: (d) => new Date(d.date),
-            yField: 'close',
-        };
-
-        return <Area {...config} />;
-    };
-    const DemoPie = () => {
-        const config = {
-            data: [
-                { type: '分类一', value: 27 },
-                { type: '分类二', value: 25 },
-                { type: '分类三', value: 18 },
-                { type: '分类四', value: 15 },
-                { type: '分类五', value: 10 },
-                { type: '其他', value: 5 },
-            ],
-            angleField: 'value',
-            colorField: 'type',
-            label: {
-                text: 'value',
-                style: {
-                    fontWeight: 'bold',
-                },
-            },
-            legend: {
-                color: {
-                    title: false,
-                    position: 'right',
-                    rowPadding: 5,
-                },
-            },
-        };
-        return <Pie {...config} />;
-    };
 
     return (
         <>
@@ -63,12 +23,7 @@ const StatisticPage = () => {
                     </div>
                 </div>
                 <div className="flex justify-between gap-10 lg:flex-row flex-col item-center">
-                    <div className="lg:w-1/2 lg:h-full h-72">
-                        <DemoArea />
-                    </div>
-                    <div className="lg:w-1/2 lg:h-full h-72">
-                        <DemoPie />
-                    </div>
+                    
                 </div>
             </div>
 
