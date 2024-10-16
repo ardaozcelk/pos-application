@@ -5,6 +5,7 @@ const app = express();
 const cors = require("cors");
 
 const PORT = 5000;
+
 //database
 require("./database/db")();
 
