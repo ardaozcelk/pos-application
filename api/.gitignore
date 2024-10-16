@@ -4,6 +4,8 @@
 /node_modules
 /.pnp
 .pnp.js
+# dont push .env to github !
+/.env
 
 # testing
 /coverage
