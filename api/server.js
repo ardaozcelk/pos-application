@@ -11,12 +11,14 @@ require("./database/db")();
 
 //routes
 const categoryRoute = require("./routes/categories");
+const productRoute = require("./routes/products");
 
 
 //middlewares
 app.use(express.json())
 app.use(cors());
 app.use("/api/categories", categoryRoute);
+app.use("/api/products", productRoute);
 
 
 

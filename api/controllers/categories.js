@@ -21,7 +21,7 @@ exports.post_add_new_category = async (req, res) => {
 
 exports.put_update_category = async (req, res) => {
     try {
-        const category = await Category.findOneAndUpdate({ _id: req.body.categoryId }, req.body);
+        await Category.findOneAndUpdate({ _id: req.body.categoryId }, req.body);
         res.status(200).json("Item updated successfully.");
     } catch (error) {
         console.log(error);
@@ -30,7 +30,7 @@ exports.put_update_category = async (req, res) => {
 
 exports.delete_category = async (req, res) => {
     try {
-        const category = await Category.findOneAndDelete({ _id: req.body.categoryId });
+        await Category.findOneAndDelete({ _id: req.body.categoryId });
         res.status(200).json("Item deleted successfully.");
     } catch (error) {
         console.log(error);
