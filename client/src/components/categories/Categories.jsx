@@ -24,7 +24,7 @@ const Categories = ({ categories, setCategories }) => {
             <li className="category-item !bg-orange-800 hover:opacity-90" onClick={() => setIsEditModalOpen(true)}>
                 <EditOutlined />
             </li>
-            <Edit isEditModalOpen={isEditModalOpen} setIsEditModalOpen={setIsEditModalOpen} />
+            <Edit isEditModalOpen={isEditModalOpen} setIsEditModalOpen={setIsEditModalOpen} setCategories={setCategories} categories={categories} />
         </ul>
     )
 }
