@@ -19,8 +19,25 @@ const Edit = ({ isEditModalOpen, setIsEditModalOpen, categories, setCategories }
                 return item;
             }))
         } catch (error) {
-            message.success("Bir şeyler yanlış gitti!");
+            message.error("Bir şeyler yanlış gitti!");
             console.log(error);
+        }
+    }
+
+    const deleteCategory = (id) => {
+        if (window.confirm("Emin misiniz ?")) {
+            try {
+                fetch("http://localhost:5000/api/categories/delete-category", {
+                    method: "DELETE",
+                    body: JSON.stringify({ categoryId: id }),
+                    headers: { "Content-type": "application/json; charset=UTF-8" }
+                });
+                message.success("Kategori başarıyla silindi.");
+                setCategories(categories.filter((item) => item._id !== id));//dinamik olarak silinen öğeyi kaldırır
+            } catch (error) {
+                message.error("Bir şeyler yanlış gitti!");
+                console.log(error);
+            }
         }
     }
 
@@ -48,7 +65,7 @@ const Edit = ({ isEditModalOpen, setIsEditModalOpen, categories, setCategories }
                 <div>
                     <Button type='link' onClick={() => { setEditingRow(record) }} className='pl-0'>Düzenle</Button>
                     <Button type='text' htmlType='submit'>Kaydet</Button>
-                    <Button type='text' danger>Sil</Button>
+                    <Button type='text' onClick={() => deleteCategory(record._id)} danger>Sil</Button>
                 </div>
             )
         }
