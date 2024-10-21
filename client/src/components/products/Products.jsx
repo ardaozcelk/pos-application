@@ -2,8 +2,12 @@ import { useEffect, useState } from "react";
 import ProductItem from "./ProductItem";
 import { EditOutlined, PlusOutlined } from "@ant-design/icons";
 import Add from "./Add";
+import { useNavigate } from "react-router-dom";
 
 const Products = ({ categories }) => {
+    const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+    const navigate = useNavigate();
+
     const [products, setProducts] = useState([]);
     useEffect(() => {
         const getProducts = async () => {
@@ -18,7 +22,7 @@ const Products = ({ categories }) => {
         getProducts();
     }, [])
 
-    const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+
 
     return (
         <div className="products-wrapper grid grid-cols-card gap-4 ">
@@ -30,7 +34,8 @@ const Products = ({ categories }) => {
                 onClick={() => { setIsAddModalOpen(true) }}>
                 <PlusOutlined className="text-white md:text-2xl" />
             </div>
-            <div className="product-item border hover:shadow-lg cursor-pointer transition-all select-none bg-orange-800 flex justify-center items-center hover:opacity-90 min-h-[180px]">
+            <div className="product-item border hover:shadow-lg cursor-pointer transition-all select-none bg-orange-800 flex justify-center items-center hover:opacity-90 min-h-[180px]"
+                onClick={() => navigate("/products")}> {/*farklı bir yönlendirme stili*/}
                 <EditOutlined className="text-white md:text-2xl" />
             </div>
             <Add isAddModalOpen={isAddModalOpen} setIsAddModalOpen={setIsAddModalOpen} categories={categories} setProducts={setProducts} products={products} />
