@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteCart } from "../../redux/cartSlice";
 
 const CartTotals = () => {
-    const { cartItems } = useSelector((state) => state.cart);
+    const cart = useSelector((state) => state.cart);
     const dispatch = useDispatch();
 
     return (
@@ -12,7 +12,7 @@ const CartTotals = () => {
             <h2 className="bg-blue-600 text-center py-4 text-white font-bold tracking-wide">Sepetteki Ürünler</h2>
             <ul className="cart-items px-2 flex flex-col gap-y-3 pt-2 overflow-y-auto py-2">
 
-                {cartItems.map((item) => (
+                {cart.cartItems.map((item) => (
                     <li className="cart-item flex justify-between" key={item._id}>
                         <div className="flex items-center">
                             <img src={item.img} alt="" className="w-16 h-16 object-cover cursor-pointer"
@@ -36,17 +36,18 @@ const CartTotals = () => {
                 <div className="border-t border-b">
                     <div className="flex justify-between px-2">
                         <b>Ara Toplam</b>
-                        <span>99₺</span>
+                        <span>{cart.total > 0 ? (cart.total).toFixed(2) : 0}₺</span>
                     </div>
                     <div className="flex justify-between px-2">
-                        <b>KDV %8</b>
-                        <span className="text-red-700">+7,92₺</span>
+                        <b>KDV %{cart.tax}</b>
+                        <span className="text-red-700">{((cart.total * cart.tax) / 100) > 0 ? `+${((cart.total * cart.tax) / 100).toFixed(2)}` : 0}₺</span>
                     </div>
                 </div>
                 <div className="border-b mt-4">
                     <div className="flex justify-between px-2">
                         <b className="text-xl text-green-500">Genel Toplam</b>
-                        <span className="text-xl">99₺</span>
+                        <span className="text-xl">{(cart.total + ((cart.total * cart.tax) / 100)) > 0 ?
+                            (cart.total + ((cart.total * cart.tax) / 100)).toFixed(2) : 0}₺</span>
                     </div>
                 </div>
                 <div className="py-4">

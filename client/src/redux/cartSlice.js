@@ -3,7 +3,9 @@ import { createSlice } from "@reduxjs/toolkit";
 const cartSlice = createSlice({
     name: "cart",
     initialState: {
-        cartItems: []
+        cartItems: [],
+        total: 0,
+        tax: 8
     },
     reducers: {
         addProduct: (state, action) => {
@@ -16,10 +18,12 @@ const cartSlice = createSlice({
             } else {
                 state.cartItems.push(action.payload);
             }
+            state.total += action.payload.price;
         },
         deleteCart: (state, action) => {
             state.cartItems = state.cartItems.filter((item) => item._id !== action.payload._id);
             //.filter() ile silmek istediğimiz item hariç her item'i cartItems'in içine ekliyoruz.
+            state.total -= action.payload.price * action.payload.quantity;
         }
     }
 });
