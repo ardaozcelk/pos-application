@@ -1,7 +1,7 @@
 import { Button } from "antd"
 import { ClearOutlined, PlusCircleOutlined, MinusCircleOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteCart } from "../../redux/cartSlice";
+import { deleteCart, increase, decrease } from "../../redux/cartSlice";
 
 const CartTotals = () => {
     const cart = useSelector((state) => state.cart);
@@ -12,7 +12,7 @@ const CartTotals = () => {
             <h2 className="bg-blue-600 text-center py-4 text-white font-bold tracking-wide">Sepetteki Ürünler</h2>
             <ul className="cart-items px-2 flex flex-col gap-y-3 pt-2 overflow-y-auto py-2">
 
-                {cart.cartItems.map((item) => (
+                {cart.cartItems.length > 0 ? cart.cartItems.map((item) => (
                     <li className="cart-item flex justify-between" key={item._id}>
                         <div className="flex items-center">
                             <img src={item.img} alt="" className="w-16 h-16 object-cover cursor-pointer"
@@ -22,15 +22,27 @@ const CartTotals = () => {
                                 <span>{item.price}₺ x {item.quantity}</span>
                             </div>
                         </div>
-                        <div className="flex items-center gap-x-2">
-                            <Button type="primary" size="small" className="flex items-center justify-center !rounded-full" icon={<PlusCircleOutlined />} />
-                            <span className="font-bold">
+                        <div className="flex items-center">
+                            <Button type="primary" size="small" className="flex items-center justify-center !rounded-full" icon={<PlusCircleOutlined />}
+                                onClick={() => dispatch(increase(item))} />
+                            <span className="font-bold w-6 inline-block text-center">
                                 {item.quantity}
                             </span>
-                            <Button type="primary" size="small" className="flex items-center justify-center !rounded-full" icon={<MinusCircleOutlined />} />
+                            <Button type="primary" size="small" className="flex items-center justify-center !rounded-full" icon={<MinusCircleOutlined />}
+                                onClick={() => {
+                                    if (item.quantity === 1) {
+                                        if (window.confirm("Ürün Silinsin Mi ?")) {
+                                            dispatch(decrease(item))
+                                        }
+                                    }
+                                    if (item.quantity > 1) {
+                                        dispatch(decrease(item))
+                                    }
+                                }} />
                         </div>
                     </li>
-                ))}
+                )) :
+                    "Spette hiç ürün yok.."}
             </ul>
             <div className="cart-totals mt-auto">
                 <div className="border-t border-b">
