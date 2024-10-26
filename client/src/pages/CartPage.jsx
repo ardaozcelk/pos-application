@@ -73,7 +73,7 @@ const CartPage = () => {
         },
         {
             title: 'Toplam Fiyat',
-            render: (text, record) => {
+            render: (_, record) => {
                 return (<span>{(record.price * record.quantity).toFixed(2)}₺</span>)
             }
         },
@@ -104,15 +104,16 @@ const CartPage = () => {
                     <Card className="w-72">
                         <div className="flex justify-between">
                             <span>Ara Toplam</span>
-                            <span>549.00₺</span>
+                            <span>{cart.total > 0 ? (cart.total).toFixed(2) : 0}₺</span>
                         </div>
                         <div className="flex justify-between my-2">
-                            <span>KDV Toplam %8</span>
-                            <span className="text-red-600">43.92₺</span>
+                            <span>KDV Toplam %{cart.tax}</span>
+                            <span className="text-red-600">{((cart.total * cart.tax) / 100) > 0 ? `+${((cart.total * cart.tax) / 100).toFixed(2)}` : 0}₺</span>
                         </div>
                         <div className="flex justify-between font-bold">
                             <span>Toplam</span>
-                            <span>592.92₺</span>
+                            <span>{(cart.total + ((cart.total * cart.tax) / 100)) > 0 ?
+                            (cart.total + ((cart.total * cart.tax) / 100)).toFixed(2) : 0}₺</span>
                         </div>
                         <Button className="mt-4 w-full" type="primary" size="large" onClick={showModal}>Sipariş Oluştur</Button>
                     </Card>

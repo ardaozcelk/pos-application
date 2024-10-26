@@ -1,12 +1,28 @@
 import { Form, Input, Modal, Select, Card, Button } from "antd";
+import { useSelector } from "react-redux";
+
 const CreateBill = ({ isModalOpen, setIsModalOpen }) => {
 
     const closeModel = () => {
         setIsModalOpen(false);
     }
-    const onFinish = (value) => {
-        console.log("Received values of from: ", value);
+    const onFinish = (values) => {
+        try {
+            fetch("http://localhost:5000/api/bills/add-bill", {
+                method: "POST",
+                body: JSON.stringify({
+                    ...values,
+                    subTotal: cart.total,
+                    tax: cart.tax,
+                    totalAmount: (cart.total + ((cart.total * cart.tax) / 100)).toFixed(2),
+
+                })
+            });
+        } catch (error) {
+            console.log(error);
+        }
     }
+    const cart = useSelector((state) => state.cart);
     return (
         <Modal title="Fatura Oluştur" open={isModalOpen} onCancel={closeModel} footer={false} >
             <Form layout={"vertical"} onFinish={onFinish}>
@@ -32,15 +48,16 @@ const CreateBill = ({ isModalOpen, setIsModalOpen }) => {
                 <Card>
                     <div className="flex justify-between">
                         <span>Ara Toplam</span>
-                        <span>549.00₺</span>
+                        <span>{cart.total > 0 ? (cart.total).toFixed(2) : 0}₺</span>
                     </div>
                     <div className="flex justify-between my-2">
-                        <span>KDV Toplam %8</span>
-                        <span className="text-red-600">+43.92₺</span>
+                        <span>KDV Toplam %{cart.tax}</span>
+                        <span className="text-red-600">{((cart.total * cart.tax) / 100) > 0 ? `+${((cart.total * cart.tax) / 100).toFixed(2)}` : 0}₺</span>
                     </div>
-                    <div className="flex justify-between">
-                        <b>Toplam</b>
-                        <b>592.92₺</b>
+                    <div className="flex justify-between font-bold">
+                        <span>Toplam</span>
+                        <span>{(cart.total + ((cart.total * cart.tax) / 100)) > 0 ?
+                            (cart.total + ((cart.total * cart.tax) / 100)).toFixed(2) : 0}₺</span>
                     </div>
                     <div className="flex justify-end">
                         <Button className="mt-4" type="primary" htmlType="submit">Sipariş Oluştur</Button>
