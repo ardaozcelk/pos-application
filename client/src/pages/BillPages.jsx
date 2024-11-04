@@ -77,6 +77,7 @@ const BillPages = () => {
           columns={columns}
           bordered
           pagination={false}
+          scroll={{x:1000,y:300}}
         />
       </div>
       <PrintBill isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} customer={customer} />
