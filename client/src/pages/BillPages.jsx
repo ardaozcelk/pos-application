@@ -4,7 +4,10 @@ import PrintBill from "../components/bills/PrintBill.jsx";
 import Header from "../components/header/Header.jsx";
 const BillPages = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [billItems, setBillItems] = useState();
+  const [billItems, setBillItems] = useState([]);
+  const [customer, setCustomer] = useState();
+
+
 
   useEffect(() => {
     try {
@@ -55,9 +58,12 @@ const BillPages = () => {
       title: "Actions",
       dataIndex: "action",
       key: "action",
-      render: (text) => {
+      render: (_, record) => {
         return <Button type="link" className="pl-0"
-          onClick={() => setIsModalOpen(true)}>Yazdır</Button>
+          onClick={() => {
+            setIsModalOpen(true);
+            setCustomer(record);
+          }}>Yazdır</Button>
       }
     },
   ];
@@ -73,7 +79,7 @@ const BillPages = () => {
           pagination={false}
         />
       </div>
-      <PrintBill isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+      <PrintBill isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} customer={customer} />
     </>
   );
 };
