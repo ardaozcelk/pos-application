@@ -2,10 +2,12 @@ import { Button, message } from "antd"
 import { ClearOutlined, PlusCircleOutlined, MinusCircleOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteCart, increase, decrease, reset } from "../../redux/cartSlice";
+import { useNavigate } from "react-router-dom";
 
 const CartTotals = () => {
     const cart = useSelector((state) => state.cart);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     return (
         <div className="cart h-full max-h-[calc(100vh_-_90px)] flex flex-col">
@@ -67,8 +69,8 @@ const CartTotals = () => {
                     </div>
                 </div>
                 <div className="py-4">
-                    <Button type="primary" size="large" className="w-full"
-                        disabled={cart.cartItems.length > 0 ? false : true}>Sipariş Oluştur</Button>
+                    <Button type="primary" size="large" className="w-full" onClick={() => { navigate("/cart") }}
+                        disabled={cart.cartItems.length > 0 ? false : true} >Sipariş Oluştur</Button>
                     <Button type="primary" size="large" className="w-full mt-2 flex items-center justify-center" icon={<ClearOutlined />} danger
                         disabled={cart.cartItems.length > 0 ? false : true} onClick={() => {
                             if (window.confirm("Emin Misiniz ?")) {
