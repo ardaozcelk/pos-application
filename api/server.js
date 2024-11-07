@@ -1,8 +1,7 @@
 const express = require("express");
-
 const app = express();
-
 const cors = require("cors");
+const logger = require("morgan");
 
 const PORT = 5000;
 
@@ -19,6 +18,7 @@ const userRoute = require("./routes/users");
 //middlewares
 app.use(express.json())
 app.use(cors());
+app.use(logger());
 app.use("/api/categories", categoryRoute);
 app.use("/api/products", productRoute);
 app.use("/api/bills", billRoute);
