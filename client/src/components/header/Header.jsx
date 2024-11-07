@@ -1,5 +1,5 @@
-import { Badge, Input } from "antd";
-import { Link } from "react-router-dom";
+import { Badge, Input, message } from "antd";
+import { Link, useNavigate } from "react-router-dom";
 import {
     SearchOutlined,
     HomeOutlined,
@@ -13,6 +13,16 @@ import { useSelector } from "react-redux";
 
 const Header = () => {
     const cart = useSelector((state) => state.cart)
+    const navigate = useNavigate();
+
+    const logOut = () => {
+        if (window.confirm("Çıkış Yapmak İstiyor Musunuz ?")) {
+            localStorage.removeItem("posUser");
+            navigate("/login");
+            message.success("Çıkış İşlemi Başarılı.");
+        }
+    }
+
     return (
         <div className="border-b mb-6">
             <header className="py-4 px-6 flex justify-between items-center gap-10">
@@ -52,10 +62,12 @@ const Header = () => {
                         <BarChartOutlined className="md:text-2xl text-xl" />
                         <span className="md:text-xs text-[10px]">İstatistikler</span>
                     </Link>
-                    <Link to={"/"} className="menu-link flex flex-col items-center justify-center space-y-1 hover:text-[#40a9ff] transition-all">
-                        <LogoutOutlined className="md:text-2xl text-xl" />
-                        <span className="md:text-xs text-[10px]">Çıkış</span>
-                    </Link>
+                    <div onClick={logOut}>
+                        <Link className="menu-link flex flex-col items-center justify-center space-y-1 hover:text-[#40a9ff] transition-all">
+                            <LogoutOutlined className="md:text-2xl text-xl" />
+                            <span className="md:text-xs text-[10px]">Çıkış</span>
+                        </Link>
+                    </div>
                 </div>
                 <Badge count={5} offset={[0, 6]} className="md:hidden flex">
                     <Link to={"/"} className="menu-link flex flex-col items-center justify-center space-y-1 hover:text-[#40a9ff] transition-all">

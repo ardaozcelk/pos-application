@@ -21,7 +21,7 @@ const Login = () => {
             const user = await res.json();
 
             if (res.status === 200) {
-                localStorage.setItem("postUser", JSON.stringify({
+                localStorage.setItem("posUser", JSON.stringify({
                     username: user.username,
                     email: user.email
                 }))
