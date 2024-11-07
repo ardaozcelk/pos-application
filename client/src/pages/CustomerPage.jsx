@@ -1,8 +1,8 @@
-import { Table } from "antd";
+import { Spin, Table } from "antd";
 import Header from "../components/header/Header.jsx";
 import { useEffect, useState } from "react";
 const CustomerPage = () => {
-    const [billItems, setBillItems] = useState([]);
+    const [billItems, setBillItems] = useState();
 
     useEffect(() => {
         try {
@@ -40,8 +40,8 @@ const CustomerPage = () => {
     return (
         <>
             <Header />
-            <div className="px-6">
-                <h1 className="text-4xl font-bold text-center mb-4">Müşterilerim</h1>
+            <h1 className="text-4xl font-bold text-center mb-4">Müşterilerim</h1>
+            {billItems ? (<div className="px-6">
                 <Table
                     dataSource={billItems}
                     columns={columns}
@@ -50,7 +50,7 @@ const CustomerPage = () => {
                     scroll={{ x: 1000, y: 450 }}
                     rowKey="_id"
                 />
-            </div>
+            </div>) : <Spin size="large" className="absolute top-1/2 w-screen h-screen flex justify-center" />}
         </>
     );
 };

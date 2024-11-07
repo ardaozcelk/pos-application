@@ -2,9 +2,12 @@ import { Button, Table } from "antd";
 import { useEffect, useState } from "react";
 import PrintBill from "../components/bills/PrintBill.jsx";
 import Header from "../components/header/Header.jsx";
+import { Spin } from "antd";
+
+
 const BillPages = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [billItems, setBillItems] = useState([]);
+  const [billItems, setBillItems] = useState();
   const [customer, setCustomer] = useState();
 
 
@@ -71,8 +74,8 @@ const BillPages = () => {
   return (
     <>
       <Header />
-      <div className="px-6">
-        <h1 className="text-4xl font-bold text-center mb-4">Faturalar</h1>
+      <h1 className="text-4xl font-bold text-center mb-4">Faturalar</h1>
+      {billItems ? (<div className="px-6">
         <Table
           dataSource={billItems}
           columns={columns}
@@ -81,7 +84,7 @@ const BillPages = () => {
           scroll={{ x: 1000, y: 450 }}
           rowKey="_id"
         />
-      </div>
+      </div>) : <Spin size="large" className="absolute top-1/2 w-screen h-screen flex justify-center" />}
       <PrintBill isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} customer={customer} />
     </>
   );

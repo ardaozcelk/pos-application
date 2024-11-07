@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import Header from "../components/header/Header.jsx";
 import StatisticCard from "../components/statistic/StatisticCard.jsx";
+import { Spin } from "antd";
 
 const StatisticPage = () => {
-    const [data, setData] = useState([]);
+    const [data, setData] = useState();
     const [products, setProducts] = useState([]);
     const user = JSON.parse(localStorage.getItem("posUser"));
 
@@ -42,8 +43,8 @@ const StatisticPage = () => {
     return (
         <>
             <Header />
-            <div className="px-6 md:pb-0 pb-20">
-                <h1 className="text-4xl font-bold text-center mb-4">İstatistiklerim</h1>
+            <h1 className="text-4xl font-bold text-center mb-4">İstatistiklerim</h1>
+            {data ? (<div className="px-6 md:pb-0 pb-20">
                 <div className="statistic-section">
                     <h2 className="text-lg">
                         Hoş geldin{" "}
@@ -72,7 +73,7 @@ const StatisticPage = () => {
                         />
                     </div>
                 </div>
-            </div>
+            </div>) : <Spin size="large" className="absolute top-1/2 w-screen h-screen flex justify-center" />}
         </>
     );
 };
