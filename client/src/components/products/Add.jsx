@@ -12,7 +12,7 @@ const Add = ({ isAddModalOpen, setIsAddModalOpen, categories, setProducts, produ
                 body: JSON.stringify(values),
                 headers: { "Content-type": "application/json; charset=UTF-8" }
             });
-            message.success("Kategori Başarıyla Eklendi!");
+            message.success("Ürün Başarıyla Eklendi!");
             form.resetFields();
             setProducts([...products, { ...values, _id: Math.random(), price: Number(values.price) }]); // ekrana dinamik olarak bas
             setIsAddModalOpen(false)
