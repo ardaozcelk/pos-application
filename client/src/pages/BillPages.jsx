@@ -52,7 +52,8 @@ const BillPages = () => {
       key: "totalAmount",
       render: (text) => {
         return <span>{text}₺</span>
-      }
+      },
+      sorter: (a, b) => a.totalAmount - b.totalAmount,
     },
     {
       title: "Actions",
@@ -77,7 +78,8 @@ const BillPages = () => {
           columns={columns}
           bordered
           pagination={false}
-          scroll={{x:1000,y:300}}
+          scroll={{ x: 1000, y: 450 }}
+          rowKey="_id"
         />
       </div>
       <PrintBill isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} customer={customer} />
