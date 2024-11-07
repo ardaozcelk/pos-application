@@ -71,7 +71,7 @@ const Header = ({ setSearch }) => {
                         <span className="md:text-xs text-[10px]">İstatistikler</span>
                     </Link>
                     <div onClick={logOut}>
-                        <Link className={`menu-link flex flex-col items-center justify-center space-y-1 hover:text-[#40a9ff] transition-all ${pathname === "/" && "active"}`}>
+                        <Link className={`menu-link flex flex-col items-center justify-center space-y-1 hover:text-[#40a9ff] transition-all`}>
                             <LogoutOutlined className="md:text-2xl text-xl" />
                             <span className="md:text-xs text-[10px]">Çıkış</span>
                         </Link>
